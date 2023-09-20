@@ -1,6 +1,8 @@
 ﻿#include <stdio.h>
 #include "SDL.h"
 
+#include "global_Classes.h"
+
 #pragma comment(lib, "SDL2main.lib")
 #pragma comment(lib, "SDL2.lib")
 
@@ -9,6 +11,7 @@ SDL_Renderer* renderer;
 
 int SDL_main(int argc, char* argv[])
 {
+
 	printf("Start\n");
 
 	// Initialize SDL
@@ -18,7 +21,7 @@ int SDL_main(int argc, char* argv[])
 	}
 
 	// Create window
-	window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_OPENGL);
+	window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Data.SCREEN_WIDTH, Data.SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
 	if (window == NULL) {
 		printf("Could not create window! (%s)\n", SDL_GetError());
 		return -1;
@@ -32,7 +35,7 @@ int SDL_main(int argc, char* argv[])
 	}
 
 	// Clear renderer (white)
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(renderer, Data.backgroundColor.r, Data.backgroundColor.g, Data.backgroundColor.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
 
 	// Draw rect (red)
