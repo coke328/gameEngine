@@ -131,13 +131,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameEngine.cpp" />
     <ClCompile Include="global_Classes.cpp" />
+    <ClCompile Include="loopsManager.cpp" />
     <ClCompile Include="math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="global_Classes.h" />
+    <ClInclude Include="loopsManager.h" />
     <ClInclude Include="math.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
