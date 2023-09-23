@@ -12,4 +12,4 @@ void globalVar::setMainloopFPS(int fps) {
 	MainloopFPS = fps;
 }
 
-globalVar Data;
+globalVar g_Data;

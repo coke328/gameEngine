@@ -5,6 +5,7 @@
 #include <string>
 #include <chrono>
 #include "loopsManager.h"
+#include "ObjectsManager.h"
 
 class Game
 {

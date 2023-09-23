@@ -19,4 +19,4 @@ public:
 };
 
 
-extern globalVar Data;
+extern globalVar g_Data;

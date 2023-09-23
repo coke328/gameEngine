@@ -11,7 +11,7 @@ void Game::init() {
 	}
 
 	// Create window
-	window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Data.SCREEN_WIDTH, Data.SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+	window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, g_Data.SCREEN_WIDTH, g_Data.SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
 	if (window == NULL) {
 		//printf("Could not create window! (%s)\n", SDL_GetError());
 		std::cout << "Could not initialize window! " + (std::string)SDL_GetError() << std::endl;
@@ -25,11 +25,15 @@ void Game::init() {
 		std::cout << "Could not create renderer! " + (std::string)SDL_GetError() << std::endl;
 		running = false;
 	}
+
+	ObjectsManager::getInstance();//create ObjectManager , start function call
+
+	loopsManager::getInstance().init();//loop clock set to now,start
 }
 
 void Game::render() {
 	// Clear renderer
-	SDL_SetRenderDrawColor(renderer, Data.backgroundColor.r, Data.backgroundColor.g, Data.backgroundColor.b, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(renderer, g_Data.backgroundColor.r, g_Data.backgroundColor.g, g_Data.backgroundColor.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
 
 	// Draw rect (red)
@@ -68,7 +72,7 @@ void Game::loop() {
 
 		event();
 
-
+		loopsManager::getInstance().update();
 
 		render();
 

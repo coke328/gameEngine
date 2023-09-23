@@ -136,6 +136,9 @@
     <ClCompile Include="global_Classes.cpp" />
     <ClCompile Include="loopsManager.cpp" />
     <ClCompile Include="math.cpp" />
+    <ClCompile Include="ObjectsManager.cpp" />
+    <ClCompile Include="script.cpp" />
+    <ClCompile Include="testObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
@@ -143,6 +146,9 @@
     <ClInclude Include="global_Classes.h" />
     <ClInclude Include="loopsManager.h" />
     <ClInclude Include="math.h" />
+    <ClInclude Include="ObjectsManager.h" />
+    <ClInclude Include="script.h" />
+    <ClInclude Include="testObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
