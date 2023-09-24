@@ -4,12 +4,9 @@
 
 class testObject : public script
 {
-	float LoopFps;
 
 public:
-	testObject(float fps) : script(fps) {
-		LoopFps = fps;
-	}
+	testObject(float fps) : script(fps) {}
 
 	void Start();
 	void Loop();

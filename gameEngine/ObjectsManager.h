@@ -1,6 +1,7 @@
 #pragma once
 #include "loopsManager.h"
 #include "testObject.h"
+#include "testObject2.h"
 
 class ObjectsManager
 {
@@ -9,7 +10,8 @@ class ObjectsManager
 	ObjectsManager();
 	//objectClasses 
 
-	testObject tObject = testObject(1);
+	testObject* tObject;
+	testObject2* tObject2;
 
 public:
 	~ObjectsManager();

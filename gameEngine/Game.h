@@ -17,7 +17,7 @@ class Game
 public:
 	void init();
 	void render();
-	void event();
+	void events();
 	void dest();
 	void loop();
 };

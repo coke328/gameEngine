@@ -29,6 +29,7 @@ void Game::init() {
 	ObjectsManager::getInstance();//create ObjectManager , start function call
 
 	loopsManager::getInstance().init();//loop clock set to now,start
+	ThreadLoopsManager::getInstance().init();
 }
 
 void Game::render() {
@@ -45,7 +46,7 @@ void Game::render() {
 	SDL_RenderPresent(renderer);
 }
 
-void Game::event() {
+void Game::events() {
 	while(SDL_PollEvent(&e)) {
 		switch (e.type) {
 		case SDL_QUIT:
@@ -64,18 +65,20 @@ void Game::dest(){
 }
 
 void Game::loop() {
-	std::chrono::system_clock::time_point start;
-	std::chrono::nanoseconds nano;
+	std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
+	std::chrono::nanoseconds deltaT;
 	while (running) 
 	{
-		start = std::chrono::system_clock::now();
-
-		event();
+		
+		events();
 
 		loopsManager::getInstance().update();
 
-		render();
-
-		nano = std::chrono::system_clock::now() - start;
+		deltaT = std::chrono::system_clock::now() - start;
+		if (deltaT.count() > Math::FpsToNanoSec(g_Data.getWindowFPS())) {
+			render();
+			start = std::chrono::system_clock::now();
+		}
+			
 	}
 }

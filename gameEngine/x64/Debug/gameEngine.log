@@ -1,2 +1,7 @@
-﻿  testObject.cpp
+﻿  loopsManager.cpp
+C:\Users\minig\OneDrive\Documents\GitHub\gameEngine\gameEngine\loopsManager.cpp(71,64): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
   gameEngine.vcxproj -> C:\Users\minig\OneDrive\Documents\GitHub\gameEngine\x64\Debug\gameEngine.exe

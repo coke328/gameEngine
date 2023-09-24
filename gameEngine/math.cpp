@@ -9,3 +9,13 @@ float Math::Clamp(float n, float min, float max) {
 	}
 	return n;
 }
+double Math::SecToNanoSec(double sec) {
+	return sec * nanoSec;
+}
+double Math::NanoSecToSec(double nSec) {
+	return nSec / nanoSec;
+}
+double Math::FpsToNanoSec(float fps) {
+	return nanoSec / fps;
+}
+
