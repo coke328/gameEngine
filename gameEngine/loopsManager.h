@@ -29,8 +29,6 @@ public:
 
 	bool registerScript(script* sc);
 
-	void setStartTimeAsNow();
-
 	void init();
 
 	void update();
@@ -42,14 +40,22 @@ class ThreadLoopsManager
 {
 private:
 	static ThreadLoopsManager* instance;
+
 	ThreadLoopsManager();
+
 	std::list<script_thread*> scripts;
+
 
 public:
 	~ThreadLoopsManager();
+
 	static ThreadLoopsManager& getInstance();
+
 	void registerScript(script_thread* sc);
+
 	void startThread(script_thread* sc);
+
 	void init();
+
 };
 

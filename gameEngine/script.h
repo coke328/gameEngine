@@ -26,9 +26,12 @@ public:
 	double getTargetDeltaT();
 	void setDeltaT(double dt);
 
-	virtual void Start() = 0;
+	void callStart();
+	void callLoop(double deltaT);
 
-	virtual void Loop() = 0;
+	virtual void Start();
+
+	virtual void Loop();
 
 };
 

@@ -2,8 +2,8 @@
 
 ObjectsManager::ObjectsManager() 
 {
-    tObject = new testObject(1);
-    tObject2 = new testObject2(1);
+    tObject = new testObject();
+    tObject2 = new testObject2();
 }
 
 ObjectsManager::~ObjectsManager() 

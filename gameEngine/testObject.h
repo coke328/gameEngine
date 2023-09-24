@@ -6,7 +6,7 @@ class testObject : public script
 {
 
 public:
-	testObject(float fps) : script(fps) {}
+	testObject();
 
 	void Start();
 	void Loop();

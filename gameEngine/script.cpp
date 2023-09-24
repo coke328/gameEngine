@@ -32,3 +32,24 @@ void script::setDeltaT(double dt)
 {
 	deltaT = dt;
 }
+
+void script::callStart()
+{
+	setStartTime();
+	Start();
+}
+
+void script::callLoop(double deltaT)
+{
+	setDeltaT(deltaT);
+	Loop();
+	setStartTime();
+}
+
+void script::Start()
+{
+}
+
+void script::Loop()
+{
+}

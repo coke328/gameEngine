@@ -32,28 +32,15 @@ bool loopsManager::registerScript(script* sc)
 	}
 }
 
-void loopsManager::setStartTimeAsNow()
-{
-	if (scripts.size() > 0) {
-		std::list<script*>::iterator iter;
-		for (iter = scripts.begin(); iter != scripts.end(); iter++)
-		{
-			iter.operator*()->setStartTime();
-		}
-	}
-}
-
 void loopsManager::init()
 {
 	if (scripts.size() > 0) {
 		std::list<script*>::iterator iter;
 		for (iter = scripts.begin(); iter != scripts.end(); iter++)
 		{
-			iter.operator*()->Start();
+			iter.operator*()->callStart();
 		}
 	}
-
-	setStartTimeAsNow();
 }
 
 void loopsManager::update()
@@ -68,9 +55,7 @@ void loopsManager::update()
 		{
 			deltaT = steady_clock::now() - iter.operator*()->getStartTime();
 			if (deltaT.count() > Math::SecToNanoSec(iter.operator*()->getTargetDeltaT())) {
-				iter.operator*()->setDeltaT(Math::NanoSecToSec(deltaT.count()));
-				iter.operator*()->Loop();
-				setStartTimeAsNow();
+				iter.operator*()->callLoop(Math::NanoSecToSec(deltaT.count()));
 			}
 		}
 		runningUpdate = false;
@@ -154,8 +139,7 @@ void ThreadLoopsManager::init()
 
 script_thread::script_thread()
 {
-	LoopFPS = 144;
-	targetDeltaT = 1 / LoopFPS;
+	setLoopFPS(144);
 	deltaT = 0;
 	isLoop = false;
 
@@ -166,8 +150,7 @@ script_thread::script_thread()
 
 script_thread::script_thread(float fps)
 {
-	LoopFPS = fps;
-	targetDeltaT = 1 / LoopFPS;
+	setLoopFPS(fps);
 	deltaT = 0;
 	isLoop = false;
 

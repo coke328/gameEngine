@@ -48,6 +48,13 @@ std::thread& script_thread::getThread()
 	return thread;
 }
 
+void script_thread::callStart()
+{
+
+
+	Start();
+}
+
 void script_thread::callLoop()
 {
 	
@@ -59,6 +66,10 @@ void script_thread::callLoop()
 			Loop();
 		}
 	}
+}
+
+void script_thread::Start()
+{
 }
 
 void script_thread::Loop()

@@ -36,9 +36,10 @@ public:
 	void setIsLoop(bool in);
 	std::thread& getThread();
 
+	void callStart();
 	void callLoop();
 
-	virtual void Start() = 0;
+	virtual void Start();
 
 	virtual void Loop();
 

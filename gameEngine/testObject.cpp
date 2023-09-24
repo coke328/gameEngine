@@ -2,6 +2,11 @@
 
 
 
+testObject::testObject()
+{
+	setLoopFPS(1);//must do if you not do it fps will be 144
+}
+
 void testObject::Start()
 {
 	//setLoopFPS(LoopFPS);
@@ -11,6 +16,6 @@ void testObject::Start()
 
 void testObject::Loop()
 {
-	//std::cout << "tObjectLoop" << std::endl;
+	std::cout << "tObjectLoop" << std::endl;
 }
 

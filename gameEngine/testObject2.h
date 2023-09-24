@@ -6,7 +6,7 @@ class testObject2 : public script_thread
 {
 
 public:
-	testObject2(float fps) : script_thread(fps) {}
+	testObject2();
 
 	void Start();
 	void Loop();
