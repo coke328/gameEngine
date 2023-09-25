@@ -115,6 +115,8 @@ ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
+*.VC.db-shm
+*.VC.db-wal
 *.vs
 
 # Visual Studio profiler
@@ -122,6 +124,8 @@ ipch/
 *.vsp
 *.vspx
 *.sap
+
+*
 
 # Visual Studio Trace Files
 *.e2e
