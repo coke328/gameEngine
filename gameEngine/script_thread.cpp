@@ -61,8 +61,8 @@ void script_thread::callLoop()
 	while (isLoop) {
 		nanoseconds deltaNanoT = steady_clock::now() - StartTime;
 		if (deltaNanoT.count() > Math::SecToNanoSec(targetDeltaT)) {
-			StartTime = steady_clock::now();
-			deltaT = Math::NanoSecToSec(deltaNanoT.count());
+			setStartTime();
+			setDeltaT(Math::NanoSecToSec(deltaNanoT.count()));
 			Loop();
 		}
 	}
