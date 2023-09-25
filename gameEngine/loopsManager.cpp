@@ -27,6 +27,10 @@ loopsManager* loopsManager::GetInstance() {
 	return instance;
 }
 
+void loopsManager::update()
+{
+}
+
 loopsManager::loopsManager()
 {
 }
