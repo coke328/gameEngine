@@ -4,7 +4,7 @@
 class globalVar {
 private:
 
-	int MainloopFPS;
+	int WindowFPS;
 
 public:
 	const int SCREEN_WIDTH = 640;
@@ -14,9 +14,9 @@ public:
 
 	globalVar();
 
-	int getMainloopFPS();
-	void setMainloopFPS(int fps);
+	int getWindowFPS();
+	void setWindowFPS(int fps);
 };
 
 
-extern globalVar Data;
+extern globalVar g_Data;

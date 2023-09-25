@@ -5,6 +5,7 @@
 #include <string>
 #include <chrono>
 #include "loopsManager.h"
+#include "ObjectsManager.h"
 
 class Game
 {
@@ -16,7 +17,7 @@ class Game
 public:
 	void init();
 	void render();
-	void event();
+	void events();
 	void dest();
 	void loop();
 };

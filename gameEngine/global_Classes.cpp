@@ -1,15 +1,15 @@
 #include "global_Classes.h"
 
 globalVar::globalVar() {
-	MainloopFPS = 120;
+	WindowFPS = 144;
 }
 
-int globalVar::getMainloopFPS() {
-	return MainloopFPS;
+int globalVar::getWindowFPS() {
+	return WindowFPS;
 }
 
-void globalVar::setMainloopFPS(int fps) {
-	MainloopFPS = fps;
+void globalVar::setWindowFPS(int fps) {
+	WindowFPS = fps;
 }
 
-globalVar Data;
+globalVar g_Data;

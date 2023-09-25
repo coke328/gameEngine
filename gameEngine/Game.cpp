@@ -11,7 +11,7 @@ void Game::init() {
 	}
 
 	// Create window
-	window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Data.SCREEN_WIDTH, Data.SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+	window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, g_Data.SCREEN_WIDTH, g_Data.SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
 	if (window == NULL) {
 		//printf("Could not create window! (%s)\n", SDL_GetError());
 		std::cout << "Could not initialize window! " + (std::string)SDL_GetError() << std::endl;
@@ -25,11 +25,16 @@ void Game::init() {
 		std::cout << "Could not create renderer! " + (std::string)SDL_GetError() << std::endl;
 		running = false;
 	}
+
+	ObjectsManager::getInstance();//create ObjectManager , start function call
+
+	loopsManager::getInstance().init();//loop clock set to now,start
+	ThreadLoopsManager::getInstance().init();
 }
 
 void Game::render() {
 	// Clear renderer
-	SDL_SetRenderDrawColor(renderer, Data.backgroundColor.r, Data.backgroundColor.g, Data.backgroundColor.b, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(renderer, g_Data.backgroundColor.r, g_Data.backgroundColor.g, g_Data.backgroundColor.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
 
 	// Draw rect (red)
@@ -41,7 +46,7 @@ void Game::render() {
 	SDL_RenderPresent(renderer);
 }
 
-void Game::event() {
+void Game::events() {
 	while(SDL_PollEvent(&e)) {
 		switch (e.type) {
 		case SDL_QUIT:
@@ -60,18 +65,20 @@ void Game::dest(){
 }
 
 void Game::loop() {
-	std::chrono::system_clock::time_point start;
-	std::chrono::nanoseconds nano;
+	std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
+	std::chrono::nanoseconds deltaT;
 	while (running) 
 	{
-		start = std::chrono::system_clock::now();
+		
+		events();
 
-		event();
+		loopsManager::getInstance().update();
 
-
-
-		render();
-
-		nano = std::chrono::system_clock::now() - start;
+		deltaT = std::chrono::system_clock::now() - start;
+		if (deltaT.count() > Math::FpsToNanoSec(g_Data.getWindowFPS())) {
+			render();
+			start = std::chrono::system_clock::now();
+		}
+			
 	}
 }

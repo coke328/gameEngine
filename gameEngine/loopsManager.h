@@ -1,43 +1,61 @@
 #pragma once
 #include <list>
 #include <chrono>
+#include "script.h"
+#include "script_thread.h"
+#include "math.h"
 
-class funcpAndFPS {
-	void (*fp)(float);
-	int FPS;
-public:
-	funcpAndFPS();
-	funcpAndFPS(void (*funcp)(float),int fps);
-	void setFPS(int fps);
-};
+using std::chrono::nanoseconds;
+using std::chrono::steady_clock;
+
+typedef void (script::*funcP)(double param);
 
 class loopsManager
 {
-protected:
+private:
+	static loopsManager* instance;
 
 	loopsManager();
 
-	static loopsManager* instance;
+	std::list<script*> scripts;
 
-	std::list<funcpAndFPS> funcs;
+	bool runningUpdate;
 
 public:
-	loopsManager(loopsManager& other) = delete;
-	void operator=(const loopsManager&) = delete;
 
-	static loopsManager* GetInstance();
+	~loopsManager();
 
-	void registerFunc(void (*funcp)(float),float fps) {
-		funcs.push_back(funcpAndFPS(funcp,fps));
-	}
+	static loopsManager& getInstance();
+
+	bool registerScript(script* sc);
+
+	void init();
 
 	void update();
 
-
+	bool isUpdate();
 };
 
 class ThreadLoopsManager 
 {
+private:
+	static ThreadLoopsManager* instance;
+
+	ThreadLoopsManager();
+
+	std::list<script_thread*> scripts;
+
+
+public:
+	~ThreadLoopsManager();
+
+	static ThreadLoopsManager& getInstance();
+
+	void registerScript(script_thread* sc);
+
+	void startThread(script_thread* sc);
+
+	void init();
 
 };
 

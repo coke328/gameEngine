@@ -1,9 +1,22 @@
 ﻿  Game.cpp
-C:\Users\kyumi\source\repos\gameEngine\gameEngine\Game.cpp(32,103): warning C4244: '인수': 'float'에서 'Uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kyumi\source\repos\gameEngine\gameEngine\Game.cpp(32,79): warning C4244: '인수': 'float'에서 'Uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kyumi\source\repos\gameEngine\gameEngine\Game.cpp(32,55): warning C4244: '인수': 'float'에서 'Uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\minig\OneDrive\Documents\GitHub\gameEngine\gameEngine\Game.cpp(37,109): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\minig\OneDrive\Documents\GitHub\gameEngine\gameEngine\Game.cpp(37,83): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\minig\OneDrive\Documents\GitHub\gameEngine\gameEngine\Game.cpp(37,57): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\minig\OneDrive\Documents\GitHub\gameEngine\gameEngine\Game.cpp(78,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ObjectsManager.cpp
   gameEngine.cpp
-  global_Classes.cpp
   loopsManager.cpp
-  코드를 생성하고 있습니다...
-  gameEngine.vcxproj -> C:\Users\kyumi\source\repos\gameEngine\x64\Debug\gameEngine.exe
+C:\Users\minig\OneDrive\Documents\GitHub\gameEngine\gameEngine\loopsManager.cpp(58,63): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+  script_thread.cpp
+C:\Users\minig\OneDrive\Documents\GitHub\gameEngine\gameEngine\script_thread.cpp(65,48): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+  testObject2.cpp
+  Generating Code...
+  gameEngine.vcxproj -> C:\Users\minig\OneDrive\Documents\GitHub\gameEngine\x64\Debug\gameEngine.exe
