@@ -8,16 +8,14 @@ ObjectsManager::ObjectsManager()
 
 ObjectsManager::~ObjectsManager() 
 {
-    delete instance;
-
     delete tObject;
     delete tObject2;
 
     if (Objects.size() > 0) {
-        for (int i = 0; i < Objects.size(); i++) {
-            delete Objects[i];
-        }
+        Funcs::delete_vecAndList(Objects);
     }
+
+    delete instance;
 }
 
 void ObjectsManager::resisterObject(gameObject* o)
@@ -54,5 +52,6 @@ gameObject::gameObject(gameObject* p)
 
     ObjectsManager::getInstance().resisterObject(this);
 }
+
 
 

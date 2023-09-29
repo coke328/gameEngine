@@ -9,3 +9,11 @@ void gameObject::addComponent(component* c)
 {
 	components.push_back(c);
 }
+
+gameObject::~gameObject()
+{
+	for (component* c : components) {
+		delete c;
+	}
+	components.clear();
+}

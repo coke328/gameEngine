@@ -2,10 +2,7 @@
 #include <string>
 #include <typeinfo>
 
-enum componentType
-{
 
-};
 
 class component
 {
@@ -15,7 +12,7 @@ protected:
 
 public:
 	component(component* c);
-	virtual ~component();
+	virtual ~component();//component delete in destructor of gameObject
 
 	template<typename t>
 	t* casting();
@@ -25,5 +22,5 @@ public:
 template<typename t>
 inline t* component::casting()
 {
-	return static_cast<t*>(childComponent);
+	return dynamic_cast<t*>(childComponent);
 }

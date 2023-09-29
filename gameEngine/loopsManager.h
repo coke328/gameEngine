@@ -4,6 +4,7 @@
 #include "script_loop.h"
 #include "script_thread.h"
 #include "math.h"
+#include "global_Classes.h"
 
 using std::chrono::nanoseconds;
 using std::chrono::steady_clock;

@@ -4,6 +4,7 @@
 #include "testObject.h"
 #include "testObject2.h"
 #include "gameObject.h"
+#include "global_Classes.h"
 
 class ObjectsManager
 {

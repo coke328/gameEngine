@@ -13,3 +13,12 @@ void globalVar::setWindowFPS(int fps) {
 }
 
 globalVar g_Data;
+
+template<typename t>
+void Funcs::deleteVecPtr(std::vector<void*> vec)
+{
+	for (void* p : vec) {
+		delete dynamic_cast<t*>(p);
+	}
+	vec.clear();
+}

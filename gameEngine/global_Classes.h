@@ -1,5 +1,6 @@
 #pragma once
 #include "Color.h"
+#include <vector>
 
 class globalVar {
 private:
@@ -18,5 +19,18 @@ public:
 	void setWindowFPS(int fps);
 };
 
+namespace Funcs {
+	template<typename t>
+	void deleteVecPtr(std::vector<void*> vec);
+
+	template<typename Container>
+	void delete_vecAndList(Container& c) { while (!c.empty()) delete c.back(), c.pop_back(); }
+
+
+
+}
+
 
 extern globalVar g_Data;
+
+

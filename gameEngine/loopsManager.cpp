@@ -10,6 +10,8 @@ loopsManager::loopsManager()
 
 loopsManager::~loopsManager()
 {
+	Funcs::delete_vecAndList(scripts);
+
 	delete instance;
 }
 
@@ -98,6 +100,8 @@ ThreadLoopsManager::ThreadLoopsManager()
 
 ThreadLoopsManager::~ThreadLoopsManager()
 {
+	Funcs::delete_vecAndList(scripts);
+
 	delete instance;
 }
 
