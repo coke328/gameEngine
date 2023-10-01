@@ -15,7 +15,8 @@ public:
 	gameObject(gameObject* p);
 	~gameObject();
 	void resisterChild(gameObject* c);
-	void addComponent(component* c);
+	template<typename t>
+	void addComponent();
 	template<typename t>
 	t* getComponent();
 };

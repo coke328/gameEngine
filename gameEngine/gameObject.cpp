@@ -5,10 +5,15 @@ void gameObject::resisterChild(gameObject* c)
 	childs.push_back(c);
 }
 
-void gameObject::addComponent(component* c)
+template<typename t>
+void gameObject::addComponent()
 {
-	components.push_back(c);
-	c->linkGameObject(this);
+	t* com = new t();
+	if (dynamic_cast<component*>(com) != nullptr) {
+		components.push_back(com);
+		com->linkGameObject(this);
+		com.setName(com);
+	}
 }
 
 gameObject::~gameObject()
