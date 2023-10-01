@@ -2,17 +2,22 @@
 #include <string>
 #include <typeinfo>
 
-
+class gameObject;
 
 class component
 {
 protected:
 	std::string componentName;
-	component* childComponent;
+	gameObject* gameobject;
 
 public:
-	component(component* c);
+	component();
 	virtual ~component();//component delete in destructor of gameObject
+
+	template<typename t>
+	void setName(t n);
+
+	void linkGameObject(gameObject* go);
 
 	template<typename t>
 	t* casting();
@@ -20,7 +25,13 @@ public:
 };
 
 template<typename t>
+inline void component::setName(t n)
+{
+	componentName = typeid(t).name();
+}
+
+template<typename t>
 inline t* component::casting()
 {
-	return dynamic_cast<t*>(childComponent);
+	return dynamic_cast<t*>(this);
 }

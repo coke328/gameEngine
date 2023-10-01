@@ -1,12 +1,14 @@
 #pragma once
 #include <chrono>
+#include "component.h"
+#include "gameObject.h"
 #define nanoSec 1000000000
 using std::chrono::steady_clock;
 using std::chrono::nanoseconds;
 
 typedef steady_clock::time_point timePoint;
 
-class script
+class script : public component
 {
 protected:
 	float LoopFPS;

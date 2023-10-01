@@ -8,6 +8,7 @@ void gameObject::resisterChild(gameObject* c)
 void gameObject::addComponent(component* c)
 {
 	components.push_back(c);
+	c->linkGameObject(this);
 }
 
 gameObject::~gameObject()

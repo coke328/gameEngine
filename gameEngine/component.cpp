@@ -1,11 +1,15 @@
 #include "component.h"
 
-component::component(component* c)
+component::component()
 {
-	componentName = typeid(c).name();
-	childComponent = c;
+	
 }
 
 component::~component()
 {
+}
+
+void component::linkGameObject(gameObject* go)
+{
+	gameobject = go;
 }
