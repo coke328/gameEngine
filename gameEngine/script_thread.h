@@ -7,16 +7,13 @@
 class script_thread : public script
 {
 protected:
-	bool isLoop;
 
 	std::thread thread;
 
 public:
 	script_thread();
 	script_thread(float fps);
-	~script_thread();
-	bool getIsLoop();
-	void setIsLoop(bool in);
+	virtual ~script_thread();
 	std::thread& getThread();
 
 	void callStart();

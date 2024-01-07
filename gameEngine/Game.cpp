@@ -1,7 +1,9 @@
 #include "Game.h"
 
-void Game::init() {
+void Game::init(int screenWidth, int screenHeight,int fps) {
 	std::cout << "start" << std::endl;
+
+	screenTargetFps = fps;
 
 	// Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -11,7 +13,7 @@ void Game::init() {
 	}
 
 	// Create window
-	window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, g_Data.SCREEN_WIDTH, g_Data.SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+	window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
 	if (window == NULL) {
 		//printf("Could not create window! (%s)\n", SDL_GetError());
 		std::cout << "Could not initialize window! " + (std::string)SDL_GetError() << std::endl;
@@ -26,10 +28,10 @@ void Game::init() {
 		running = false;
 	}
 
-	ObjectsManager::getInstance();//create ObjectManager , start function call
+	ObjectsManager::getInstance();//create ObjectManager , start 
 
-	loopsManager::getInstance().init();//loop clock set to now,start
-	ThreadLoopsManager::getInstance().init();
+	loopsManager::getInstance().init(fps);//loop clock set to now,start function call
+	ThreadLoopsManager::getInstance().init(fps);
 }
 
 void Game::render() {
@@ -75,8 +77,13 @@ void Game::loop() {
 		loopsManager::getInstance().update();
 
 		deltaT = std::chrono::system_clock::now() - start;
-		if (deltaT.count() > Math::FpsToNanoSec(g_Data.getWindowFPS())) {
+		if (deltaT.count() > Math::FpsToNanoSec(screenTargetFps)) {
+
+			
 			render();
+
+			//std::cout << "render dt : " << Math::NanoSecToSec(deltaT.count()) << std::endl;
+
 			start = std::chrono::system_clock::now();
 		}
 			

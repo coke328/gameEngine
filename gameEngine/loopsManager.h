@@ -20,7 +20,7 @@ private:
 
 	std::list<script_loop*> scripts;
 
-	bool runningUpdate;
+	int defaultFps;
 
 public:
 
@@ -28,13 +28,14 @@ public:
 
 	static loopsManager& getInstance();
 
-	bool registerScript(script_loop* sc);
+	void registerScript(script_loop* sc);
 
-	void init();
+	void init(int dFps);
 
 	void update();
 
-	bool isUpdate();
+	void destroyScript(script_loop* sc);
+
 };
 
 class ThreadLoopsManager 
@@ -46,6 +47,7 @@ private:
 
 	std::list<script_thread*> scripts;
 
+	int defaultFps;
 
 public:
 	~ThreadLoopsManager();
@@ -56,7 +58,8 @@ public:
 
 	void startThread(script_thread* sc);
 
-	void init();
+	void init(int dFps);
 
+	void destroyThreadScript(script_thread* st);
 };
 

@@ -4,7 +4,7 @@
 
 testObject::testObject()
 {
-	setLoopFPS(1);//must do if you not do it fps will be 144
+	//setLoopFPS(1);//must do if you not do it fps will be screen fps
 }
 
 void testObject::Start()
@@ -16,6 +16,6 @@ void testObject::Start()
 
 void testObject::Loop()
 {
-	std::cout << "tObjectLoop" << std::endl;
+	//std::cout << "toLoop dt : " << deltaT << std::endl;
 }
 

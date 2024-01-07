@@ -1,19 +1,21 @@
-﻿#include <iostream>
-#include "SDL.h"
+﻿#define SDL_MAIN_HANDLED
 
+#include <iostream>
 #include "Game.h"
 
-#pragma comment(lib, "SDL2main.lib")
-#pragma comment(lib, "SDL2.lib")
 
-
-int SDL_main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 
 	Game game;
 
-	game.init();
+	game.init(800,600,144);
+	//-------------------------make objects--------------
+	testObject* to = new testObject();
 
+
+
+	//---------------------------
 	game.loop();
 
 	game.dest();

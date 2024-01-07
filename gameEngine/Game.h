@@ -1,5 +1,5 @@
 #pragma once
-#include "SDL.h"
+#include <SDL2/SDL.h>
 #include "global_Classes.h"
 #include <iostream>
 #include <string>
@@ -14,8 +14,10 @@ class Game
 	SDL_Event e;
 	bool running;
 
+	int screenTargetFps;
+
 public:
-	void init();
+	void init(int screenWidth,int screenHeight,int screenFps);
 	void render();
 	void events();
 	void dest();

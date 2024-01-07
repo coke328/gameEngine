@@ -2,17 +2,6 @@
 
 
 
-
-bool script_thread::getIsLoop()
-{
-	return isLoop;
-}
-
-void script_thread::setIsLoop(bool in)
-{
-	isLoop = in;
-}
-
 std::thread& script_thread::getThread()
 {
 	return thread;
@@ -28,7 +17,7 @@ void script_thread::callStart()
 void script_thread::callLoop()
 {
 	
-	while (isLoop) {
+	while (active) {
 		nanoseconds deltaNanoT = steady_clock::now() - StartTime;
 		if (deltaNanoT.count() > Math::SecToNanoSec(targetDeltaT)) {
 			setStartTime();
@@ -41,5 +30,6 @@ void script_thread::callLoop()
 
 script_thread::~script_thread()
 {
-	isLoop = false;
+	active = false;
+	thread.join();
 }

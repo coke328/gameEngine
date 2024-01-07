@@ -5,7 +5,8 @@ loopsManager *loopsManager::instance;
 
 loopsManager::loopsManager()
 {
-	runningUpdate = false;
+	//std::cout << "con" << std::endl;
+	defaultFps = 120;
 }
 
 loopsManager::~loopsManager()
@@ -23,19 +24,19 @@ loopsManager& loopsManager::getInstance()
 	return *instance;
 }
 
-bool loopsManager::registerScript(script_loop* sc)
+void loopsManager::registerScript(script_loop* sc)
 {
-	if (!isUpdate()) {
-		scripts.push_back(sc);
-		return true;
-	}
-	else {
-		return false;
-	}
+	scripts.push_back(sc);
+	sc->setLoopFPS(defaultFps);
 }
 
-void loopsManager::init()
+void loopsManager::init(int dFps)
 {
+	
+	defaultFps = dFps;
+
+	//std::cout << "init dfps:" << defaultFps << std::endl;
+
 	if (scripts.size() > 0) {
 		std::list<script_loop*>::iterator iter;
 		for (iter = scripts.begin(); iter != scripts.end(); iter++)
@@ -47,32 +48,41 @@ void loopsManager::init()
 
 void loopsManager::update()
 {
-	steady_clock::time_point currentT = steady_clock::now();
-	std::list<script_loop*>::iterator iter;
-	nanoseconds deltaT;
 	if (scripts.size() > 0) 
 	{
-		runningUpdate = true;
+		steady_clock::time_point currentT = steady_clock::now();
+		std::list<script_loop*>::iterator iter;
+		nanoseconds deltaT;
 		for (iter = scripts.begin(); iter != scripts.end(); iter++)
 		{
-			deltaT = steady_clock::now() - iter.operator*()->getStartTime();
-			if (deltaT.count() > Math::SecToNanoSec(iter.operator*()->getTargetDeltaT())) {
+			deltaT = steady_clock::now() - iter.operator*()->getStartTime();//set deltaT
+			if (iter.operator*()->isActiveScript() && deltaT.count() > Math::SecToNanoSec(iter.operator*()->getTargetDeltaT())) {
+				
 				iter.operator*()->callLoop(Math::NanoSecToSec(deltaT.count()));
+				
 			}
 		}
-		runningUpdate = false;
 	}
 }
 
-bool loopsManager::isUpdate()
+void loopsManager::destroyScript(script_loop* sc)
 {
-	return runningUpdate;
+	int lastSize = scripts.size();
+	scripts.remove(sc);
+
+	if (lastSize == scripts.size()) {
+		std::cout << "destroyScript : no loop script match" << std::endl;
+	}
+
+	delete sc;
+	
 }
+
 
 script_loop::script_loop()
 {
-	LoopFPS = 144;
-	targetDeltaT = 1 / LoopFPS;
+	activateScript();
+
 	deltaT = 0;
 
 	//Start();
@@ -81,8 +91,9 @@ script_loop::script_loop()
 
 script_loop::script_loop(float fps)
 {
+	activateScript();
+
 	setLoopFPS(fps);
-	targetDeltaT = 1 / LoopFPS;
 	deltaT = 0;
 
 	//Start();
@@ -115,22 +126,25 @@ ThreadLoopsManager& ThreadLoopsManager::getInstance()
 
 void ThreadLoopsManager::registerScript(script_thread* sc)
 {
+	sc->setLoopFPS(defaultFps);
 	scripts.push_back(sc);
 }
 
 void ThreadLoopsManager::startThread(script_thread* sc)
 {
-	if (!sc->getIsLoop()) {
+	if (!sc->isActiveScript()) {
 		sc->setStartTime();
-		sc->setIsLoop(true);
+		sc->activateScript();
 		sc->getThread() = std::thread(&script_thread::callLoop, sc);
 		sc->getThread().detach();
 		
 	}
 }
 
-void ThreadLoopsManager::init()
+void ThreadLoopsManager::init(int dFps)
 {
+	defaultFps = dFps;
+
 	if (scripts.size() > 0) {
 		std::list<script_thread*>::iterator iter;
 		for (iter = scripts.begin(); iter != scripts.end(); iter++)
@@ -141,11 +155,26 @@ void ThreadLoopsManager::init()
 	}
 }
 
+void ThreadLoopsManager::destroyThreadScript(script_thread* st)
+{
+
+	int lastSize = scripts.size();
+	scripts.remove(st);
+
+	if (lastSize == scripts.size()) {
+		std::cout << "destroyScript : no loop script match" << std::endl;
+	}
+
+	delete st;
+
+
+}
+
 script_thread::script_thread()
 {
-	setLoopFPS(144);
+	activateScript();
+
 	deltaT = 0;
-	isLoop = false;
 
 	//thread = std::thread(&script_thread::callLoop,this);
 
@@ -154,9 +183,10 @@ script_thread::script_thread()
 
 script_thread::script_thread(float fps)
 {
+	activateScript();
+
 	setLoopFPS(fps);
 	deltaT = 0;
-	isLoop = false;
 
 	//thread = std::thread(&script_thread::callLoop, this);
 

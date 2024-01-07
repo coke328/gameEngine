@@ -32,7 +32,27 @@ double script::getTargetDeltaT()
 	return targetDeltaT;
 }
 
+double script::getDeltaT()
+{
+	return deltaT;
+}
+
 void script::setDeltaT(double dt)
 {
 	deltaT = dt;
+}
+
+void script::disableScript()
+{
+	active = false;
+}
+
+void script::activateScript()
+{
+	active = true;
+}
+
+bool script::isActiveScript()
+{
+	return active;
 }

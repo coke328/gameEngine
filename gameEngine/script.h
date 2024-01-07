@@ -12,11 +12,11 @@ class script : public component
 {
 protected:
 	float LoopFPS;
-	double targetDeltaT;
+	double targetDeltaT;//deltaT will little more than this
 	timePoint StartTime;
-	double deltaT;
+	double deltaT;//time between loop and loop
 
-	
+	bool active;
 
 public:
 	virtual ~script();
@@ -25,7 +25,11 @@ public:
 	void setStartTime();
 	timePoint getStartTime();
 	double getTargetDeltaT();
+	double getDeltaT();
 	void setDeltaT(double dt);
+	void disableScript();
+	void activateScript();
+	bool isActiveScript();
 
 	virtual void callStart() = 0;
 

@@ -11,6 +11,5 @@ public:
 
 	void callStart();
 	void callLoop(double deltaT);
-
 };
 

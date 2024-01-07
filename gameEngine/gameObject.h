@@ -1,35 +1,31 @@
 #pragma once
+#include <deque>
 #include <vector>
 #include "component.h"
 
 class gameObject
 {
-	
+	std::string name;
+
 	gameObject* parent;
-	std::vector<gameObject*> childs;
+	std::deque<gameObject*> childs;
 
 	std::vector<component*> components;
 
 public:
 	gameObject();
 	gameObject(gameObject* p);
-	~gameObject();
-	void resisterChild(gameObject* c);
+	virtual ~gameObject();
+	void setChild(gameObject* c);//
 	template<typename t>
-	void addComponent();
+	t* addComponent();
 	template<typename t>
 	t* getComponent();
+	bool isChild(gameObject* c);//find c in childs and return idx in childs
+	int getIdxFromChilds(gameObject* c);//return -1 : not found
+	gameObject* getChildByIdx(int idx);
+	void setName(std::string n);
+	std::string getName();
 };
 
-template<typename t>
-inline t* gameObject::getComponent()
-{
-	for (int i = 0; i < components.size(); i++) {
-		if (components[i]->componentName.compare(typeid(t*).name())) {
-			return components[i]->casting<t>();
 
-		}
-	}
-
-	return nullptr;
-}

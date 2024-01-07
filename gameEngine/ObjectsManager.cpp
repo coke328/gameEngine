@@ -2,18 +2,12 @@
 
 ObjectsManager::ObjectsManager() 
 {
-    tObject = new testObject();
-    tObject2 = new testObject2();
 }
 
 ObjectsManager::~ObjectsManager() 
 {
-    delete tObject;
-    delete tObject2;
 
-    if (Objects.size() > 0) {
-        Funcs::delete_vecAndList(Objects);
-    }
+    Objects.clear();
 
     delete instance;
 }
@@ -37,18 +31,56 @@ void ObjectsManager::init()
     
 }
 
+void ObjectsManager::destroyGameObject(gameObject* go)
+{
+    int idx = getIdxOfGameObject(go);
+    if (idx != -1) {
+        Objects.erase(Objects.begin() + idx);
+        delete go;
+    }
+    std::cout << "no GameObject deleted" << std::endl;
+}
+
+int ObjectsManager::getIdxOfGameObject(gameObject* go)
+{
+    for (int i = 0; i < Objects.size(); i++) {
+        if (Objects[i] == go) {
+            return i;
+        }
+    }
+    std::cout << "can't find idx of GameObject" << std::endl;
+    return -1;
+}
+
+gameObject* ObjectsManager::getGameObjectByName(std::string name)
+{
+
+    for (int i = 0; i < Objects.size(); i++) {
+        if (Objects[i]->getName() == name) {
+            return Objects[i];
+        }
+    }
+
+    std::cout << "getGameObjectByName : nothing match '" << name << "'" << std::endl;
+
+    return nullptr;
+}
+
 ObjectsManager *ObjectsManager::instance;
 
 gameObject::gameObject()
 {
-    parent = nullptr;
+    name = "";
+
+    parent = nullptr; 
     ObjectsManager::getInstance().resisterObject(this);
 }
 
 gameObject::gameObject(gameObject* p)
 {
-    parent = p;
-    parent->resisterChild(this);
+    name = "";
+
+    parent->setChild(this);
 
     ObjectsManager::getInstance().resisterObject(this);
 }
